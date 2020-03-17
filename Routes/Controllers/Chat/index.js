@@ -164,6 +164,7 @@ router.get("/pending", middleware, function(req, res) {
 });
 
 router.get("/request", middleware, function(req, res) {
+  console.log(req.query);
   if (req.query.accepted == 0) {
     res.render("request", {
       layout: false,
@@ -182,6 +183,7 @@ router.get("/request", middleware, function(req, res) {
 });
 
 router.post("/request", middleware, function(req, res) {
+  console.log(req.body);
   var info = {
     name: req.cookies.username,
     username: req.body.username
