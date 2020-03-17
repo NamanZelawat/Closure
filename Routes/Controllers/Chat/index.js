@@ -214,6 +214,7 @@ router.get("/hookup", middleware, function(req, res) {
     name: req.cookies.username,
     username: req.query.username
   };
+  console.log("inside get chats");
   getChats(info)
     .then(function(data) {
       res.render("hookup", {

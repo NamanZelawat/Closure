@@ -2,11 +2,13 @@ const dbase = require("./../../Schemas/userChats");
 
 function getChats(info) {
   return new Promise((resolve, reject) => {
+    console.log("function called");
     dbase
       .find({
         users: { $all: [info.name, info.username] }
       })
       .then(function(data) {
+        console.log("Successful");
         var users = [];
         data[0].chats.forEach(function(ele) {
           users.push({
