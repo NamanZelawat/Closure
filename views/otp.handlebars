@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chatter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <form class="jumbotron" method="POST" action="otp">
+            {{msg}}
+            <div class="form-group">
+                <label for="exampleInputEmail1">OTP</label>
+                <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter otp" name="otp">
+                <small id="emailHelp" class="form-text text-muted">Never share your otp with anyone
+                    else.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Verify</button>
+        </form>
+    </div>
+</body>
+
+</html>

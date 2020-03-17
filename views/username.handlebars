@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chatter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <form class="jumbotron" method="POST" action="chat">
+            {{msg}}
+            <div class="form-group">
+                <label for="exampleInputEmail1">Username</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter username" name="username">
+                <small id="emailHelp" class="form-text text-muted">It will be visible to all your friends.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">I'm ready to go</button>
+        </form>
+    </div>
+</body>
+
+</html>

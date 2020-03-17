@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chatter</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container emp-profile bg-light">
+        <nav class="container fixed-top navbar navbar-expand-lg navbar-light bg-light "
+            style="box-shadow:5px 15px 20px rgb(211, 209, 209);">
+            <a class="navbar-brand" href="#">Closure</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="view">Chat <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="me">Profile</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="pending">Pending</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signup/login?logout=1">Logout</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" method="POST" action="view">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        {{msg}}
+        <form method="POST" action="user" class="container">
+            {{error}}
+            <div class="form-group">
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="token" readonly name="username" value={{name}} style="display:none;">
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-4">
+                    <div class="profile-img">
+                        <img src="https://api.adorable.io/avatars/285/{{name}}" alt="" style="border-radius:60px;" />
+                    </div>
+                </div>
+                <div class=" col-8 col-sm-6 py-4">
+                    <div class="profile-head">
+                        <h1>
+                            @{{name}}
+                        </h1>
+                        <br>
+                        <h5>
+                            {{bio}}
+                        </h5>
+                        <br>
+                        <br>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab"
+                                    aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4 col-sm-2 py-5">
+                    {{{btn}}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="offset-0 col-12 offset-sm-4 col-sm-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-6">
+                                    <p>{{name}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-6">
+                                    <p>Kshiti Ghelani</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-6">
+                                    <p>kshitighelani@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        {{!-- <form method="POST" action="request">
+            {{error}}
+            <div class="form-group">
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="token" readonly name="username" value={{name}} style="display:none;">
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="https://api.adorable.io/avatars/285/{{name}}" alt="" style="border-radius:60px;" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h1>
+                            @{{name}}
+                        </h1>
+                        <br>
+                        <h5>
+                            {{bio}}
+                        </h5>
+                        <br>
+                        <br>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" role="tab"
+                                    aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-2">
+                    {{{btn}}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{name}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Kshiti Ghelani</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>kshitighelani@gmail.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form> --}}
+    </div>
+</body>
+
+</html>

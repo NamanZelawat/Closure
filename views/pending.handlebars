@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chatter</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="container fixed-top navbar navbar-expand-lg navbar-light bg-light "
+            style="box-shadow:5px 15px 20px rgb(211, 209, 209);">
+            <a class="navbar-brand" href="#">Closure</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="view">Chat <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="me">Profile</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="pending">Pending</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/signup/login?logout=1">Logout</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" method="POST" action="view">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" name="keyword"
+                        aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        {{msg}}
+        {{#each pending}}
+        {{!-- <a type="submit" href="request?username={{this}}&accepted=0"
+            class="btn btn-secondary bg-dark text-left btn-lg btn-block" name="submit" style="height:100%">{{this}}</a> --}}
+        <a type="submit" href="request?username={{this}}&accepted=0" name="submit"
+            style="margin-bottom:15px; width:100%; box-shadow:20px 15px 20px rgb(211, 209, 209); color:black">
+            <div class="row bg-light">
+                <div class="col-3 offset-1">
+                    <img src="https://api.adorable.io/avatars/80/{{this}}" alt="" style="border-radius:60px;" />
+                </div>
+                <div class="offset-1 col-6">
+                    <table class="h-100">
+                        <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <h3>
+                                        @{{this}}
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+</body>
+
+</html>
