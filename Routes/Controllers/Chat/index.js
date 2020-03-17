@@ -14,9 +14,7 @@ const getChats = require("./../../../Models/Chat/getChats");
 
 router.get("/", middleware, function(req, res) {
   if (req.cookies.username != "eklavya") {
-    console.log("redirecting");
     res.redirect("chat/view");
-    console.log("redirected");
   } else {
     res.render("username", {
       layout: false
@@ -38,7 +36,7 @@ router.post("/", middleware, function(req, res) {
     username(dat)
       .then(function(data) {
         res.cookie("username", `${dat.username}`);
-        console.log(req.cookies);
+
         res.redirect("chat/view");
       })
       .catch(function(data) {
@@ -67,7 +65,6 @@ router.get("/view", middleware, function(req, res) {
 });
 
 router.post("/view", middleware, function(req, res) {
-  console.log("Post view route going for search");
   search(req.body.keyword)
     .then(function(data) {
       res.render("search", {
@@ -88,7 +85,6 @@ router.get("/user", middleware, function(req, res) {
     name: req.cookies.username,
     username: req.query.username
   };
-  console.log("Opeaning user profile calling check friend");
   checkFriend(check)
     .then(function(data) {
       if (data.status == 0) {
@@ -123,8 +119,6 @@ router.get("/user", middleware, function(req, res) {
 });
 
 router.post("/user", middleware, function(req, res) {
-  console.log("Inside post friend request");
-  console.log(req.body.username);
   var pass = {
     name: req.cookies.username,
     username: req.body.username
@@ -154,7 +148,6 @@ router.get("/me", middleware, function(req, res) {
 });
 
 router.get("/pending", middleware, function(req, res) {
-  console.log("in pending");
   pending(req.cookies.token)
     .then(function(data) {
       res.render("pending", {
@@ -171,7 +164,6 @@ router.get("/pending", middleware, function(req, res) {
 });
 
 router.get("/request", middleware, function(req, res) {
-  console.log("in request");
   if (req.query.accepted == 0) {
     res.render("request", {
       layout: false,
@@ -190,15 +182,12 @@ router.get("/request", middleware, function(req, res) {
 });
 
 router.post("/request", middleware, function(req, res) {
-  console.log("Post in accepting");
-  console.log(req.body);
   var info = {
     name: req.cookies.username,
     username: req.body.username
   };
   createChat(info)
     .then(function(data) {
-      console.log(data);
       accept(info)
         .then(function(data) {
           res.redirect(`request?username=${info.username}&accepted=1`);
@@ -223,8 +212,6 @@ router.get("/hookup", middleware, function(req, res) {
     name: req.cookies.username,
     username: req.query.username
   };
-  console.log(info);
-  console.log("going for get chats");
   getChats(info)
     .then(function(data) {
       res.render("hookup", {

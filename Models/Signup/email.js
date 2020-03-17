@@ -21,13 +21,11 @@ function email(email, otp) {
 
     transporter.sendMail(mailOptions, function(err, data) {
       if (err) {
-        console.log("error in mail");
         return reject({
           success: false,
           msg: "Mail was not sent"
         });
       } else {
-        console.log("mail succesfully sent");
         return resolve({
           success: true,
           msg: "Mail was sent successfully"

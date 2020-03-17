@@ -1,7 +1,6 @@
 const dbase = require("./../../Schemas/userSchema");
 
 function search(keyword) {
-  console.log("Inside model search");
   return new Promise((resolve, reject) => {
     dbase
       .find({
@@ -10,8 +9,6 @@ function search(keyword) {
         }
       })
       .then(function(data) {
-        console.log("field found");
-        console.log(data);
         return resolve({
           success: true,
           data: data

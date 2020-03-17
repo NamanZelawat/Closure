@@ -1,6 +1,4 @@
 function authenticate(req, res, next) {
-  console.log("in middleware");
-  console.log(req.cookies);
   if (req.cookies.token == undefined || req.cookies.verified == "false") {
     res.render("login", {
       layout: false,

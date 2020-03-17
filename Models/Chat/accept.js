@@ -1,7 +1,6 @@
 const dbase = require("./../../Schemas/userSchema");
 
 function accept(info) {
-  console.log("in accept");
   return new Promise((resolve, reject) => {
     dbase
       .findOneAndUpdate(
@@ -18,8 +17,6 @@ function accept(info) {
         }
       )
       .then(function(data) {
-        console.log(data);
-        console.log("Done updating one acc");
         dbase
           .findOneAndUpdate(
             {
@@ -43,7 +40,6 @@ function accept(info) {
           });
       })
       .catch(function(err) {
-        console.log(err);
         return reject({
           success: false
         });

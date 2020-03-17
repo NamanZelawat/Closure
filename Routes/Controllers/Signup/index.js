@@ -40,7 +40,6 @@ router.post("/signin", function(req, res) {
       msg: "Passowrd does not match"
     });
   } else {
-    console.log("calling signin");
     signin(req.body)
       .then(function(data) {
         if (data.success) {
@@ -107,14 +106,14 @@ router.post("/login", function(req, res) {
               res.cookie("email", `${data.email}`);
               res.cookie("username", `${data.username}`);
               res.cookie("verified", true);
-              console.log("Cookie set redirecting to chat");
+
               res.redirect("../chat");
             } else {
               res.cookie("token", `${data.token}`);
               res.cookie("email", `${data.email}`);
               res.cookie("username", `${data.username}`);
               res.cookie("verified", false);
-              console.log("Cookie set redirecting to otp");
+
               res.redirect("otp");
             }
           } else {
@@ -123,7 +122,6 @@ router.post("/login", function(req, res) {
         }
       });
   } else if (req.cookies.verified == "false") {
-    console.log("Cookie found but not verified redirecting to otp");
     res.redirect("otp");
   } else if (req.body.email != req.cookies.email) {
     checkExist(req.body.email)
@@ -141,27 +139,27 @@ router.post("/login", function(req, res) {
               res.cookie("email", `${data.email}`);
               res.cookie("username", `${data.username}`);
               res.cookie("verified", true);
-              console.log("Cookie set redirecting to chat");
+
               res.redirect("../chat");
             } else {
               res.cookie("token", `${data.token}`);
               res.cookie("email", `${data.email}`);
               res.cookie("username", `${data.username}`);
               res.cookie("verified", false);
-              console.log("Cookie set redirecting to otp");
+
               res.redirect("otp");
             }
             res.cookie("email", `${data.email}`);
             res.cookie("username", `${data.username}`);
             res.cookie("verified", true);
-            console.log("Cookie set redirecting to chat");
+
             res.redirect("../chat");
           } else {
             res.cookie("token", `${data.token}`);
             res.cookie("email", `${data.email}`);
             res.cookie("username", `${data.username}`);
             res.cookie("verified", false);
-            console.log("Cookie set redirecting to otp");
+
             res.redirect("otp");
           }
         }
@@ -172,7 +170,6 @@ router.post("/login", function(req, res) {
 });
 
 router.get("/otp", middleware, function(req, res) {
-  console.log("get req otp");
   if (req.cookies.verified == "true") {
     res.redirect("../chat");
   } else if (req.query.verification == 0) {
@@ -194,7 +191,6 @@ router.post("/otp", middleware, function(req, res) {
   otp(req.body)
     .then(function(data) {
       if (data.success) {
-        console.log("otp verification success");
         res.cookie("verified", true);
         res.redirect("../chat");
       } else {
@@ -206,8 +202,6 @@ router.post("/otp", middleware, function(req, res) {
     });
 });
 
-router.get("/hookup", middleware, function(req, res) {
-  console.log("in hookup");
-});
+router.get("/hookup", middleware, function(req, res) {});
 
 module.exports = router;
