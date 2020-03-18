@@ -10,7 +10,7 @@ const mquerySchema = new mongoose.Schema({
     required: [true, "password is required"]
   },
   otp: {
-    type: Number,
+    type: String,
     required: [true]
   },
   verified: {

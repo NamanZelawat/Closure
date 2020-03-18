@@ -1,31 +1,34 @@
-const nodemailer = require("nodemailer");
+var nodemailer = require("nodemailer");
+var sgTransport = require("nodemailer-sendgrid-transport");
 
-function email(email, otp) {
+function email(emailid, otp) {
   return new Promise(function(resolve, reject) {
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
+    var options = {
       auth: {
-        user: "namanzelawat@gmail.com",
-        pass: "nimeshzelawat27082000"
+        api_user: "Zelawat",
+        api_key: "se#3dDz9n%VL#r7"
       }
-    });
-
-    let mailOptions = {
-      from: '"Chatter" <namanzelawat@gmail.com>',
-      to: `${email}`,
-      subject: "OTP verification",
-      text: "Welcome to chatter",
-      html: `<h1 style='align-text:center;'>Welcome to chatter</h1><br>
-                    <h3>Your otp is ${otp} please verify to activate your account`
     };
 
-    transporter.sendMail(mailOptions, function(err, data) {
+    var client = nodemailer.createTransport(sgTransport(options));
+
+    var email = {
+      from: "nisarjha@gmail.com",
+      to: emailid,
+      subject: "OTP",
+      text: "Hello world",
+      html: `<b>Your otp is ${otp}</b>`
+    };
+
+    client.sendMail(email, function(err, info) {
       if (err) {
+        console.log(err);
         return reject({
           success: false,
           msg: "Mail was not sent"
         });
       } else {
+        console.log("Message sent: " + info.response);
         return resolve({
           success: true,
           msg: "Mail was sent successfully"

@@ -3,9 +3,11 @@ const model2 = require("./../../../../Models/Signup/signin");
 
 function signin(body) {
   return new Promise((resolve, reject) => {
+    console.log("inside signin");
     model1(body.email)
       .then(function(data) {
         if (data.success == true) {
+          console.log("calling model");
           model2(body)
             .then(function(data) {
               return resolve({

@@ -237,6 +237,7 @@ router.post("/hookup", middleware, function(req, res) {
     username: req.body.username,
     message: req.body.message
   };
+  console.log("inside hookup");
   addChat(info)
     .then(function(data) {
       res.redirect(`hookup?username=${info.username}`);

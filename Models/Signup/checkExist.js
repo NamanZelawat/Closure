@@ -2,17 +2,20 @@ const dbase = require("./../../Schemas/userSchema");
 
 function signin(email) {
   return new Promise((resolve, reject) => {
+    console.log("Model 1");
     dbase
       .find({
         email: `${email}`
       })
       .then(function(data) {
         if (data.length == 0) {
+          console.log("Success ");
           return resolve({
             success: true,
             data: data
           });
         } else {
+          console.log("fail");
           return reject({
             success: false,
             token: data[0]._id,

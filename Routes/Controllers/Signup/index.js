@@ -188,6 +188,7 @@ router.get("/otp", middleware, function(req, res) {
 
 router.post("/otp", middleware, function(req, res) {
   req.body.token = req.cookies.token;
+  console.log("in otp");
   otp(req.body)
     .then(function(data) {
       if (data.success) {

@@ -2,6 +2,7 @@ const dbase = require("./../../Schemas/userChats");
 
 function addChat(info) {
   return new Promise((resolve, reject) => {
+    console.log("Add chat");
     dbase
       .findOneAndUpdate(
         {
@@ -14,6 +15,7 @@ function addChat(info) {
         }
       )
       .then(function(data) {
+        console.log("Successful");
         return resolve({
           success: true
         });
