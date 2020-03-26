@@ -8,7 +8,10 @@ function username(data) {
           _id: `${data.token}`
         },
         {
-          username: `${data.username}`
+          username: `${data.username}`,
+          first: data.first,
+          last: data.last,
+          bio: data.bio
         }
       )
       .then(function(data) {

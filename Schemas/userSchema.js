@@ -30,6 +30,19 @@ const mquerySchema = new mongoose.Schema({
   pending: {
     type: Array,
     required: false
+  },
+  first: {
+    type: String,
+    required: false
+  },
+  last: {
+    type: String,
+    required: false
+  },
+  bio: {
+    type: String,
+    required: false,
+    default: "Hey! there I am using closure."
   }
 });
 

@@ -10,14 +10,29 @@
 </head>
 
 <body>
+    <script>
+        function AvoidSpace(event) {
+            var k = event ? event.which : window.event.keyCode;
+            if (k == 32) return false;
+        }
+    </script>
     <div class="container">
         <form class="jumbotron" method="POST" action="chat">
             {{msg}}
             <div class="form-group">
                 <label for="exampleInputEmail1">Username</label>
                 <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter username" name="username">
+                    placeholder="Enter username" onkeypress="return AvoidSpace(event)" name="username">
                 <small id="emailHelp" class="form-text text-muted">It will be visible to all your friends.</small>
+                <label for="exampleInputEmail1">First name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter first name" name="first">
+                <label for="exampleInputEmail1">Last name</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter last name" name="last">
+                <label for="exampleInputEmail1">Bio</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter bio" name="bio">
             </div>
             <button type="submit" class="btn btn-primary">I'm ready to go</button>
         </form>

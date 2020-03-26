@@ -11,6 +11,7 @@ const accept = require("./../../../Models/Chat/accept");
 const createChat = require("./../../../Models/Chat/createChat");
 const addChat = require("./../../../Models/Chat/addChat");
 const getChats = require("./../../../Models/Chat/getChats");
+const profiler = require("./../../../Models/Chat/profiler");
 
 router.get("/", middleware, function(req, res) {
   if (req.cookies.username != "eklavya") {
@@ -25,6 +26,9 @@ router.get("/", middleware, function(req, res) {
 router.post("/", middleware, function(req, res) {
   var dat = {
     username: req.body.username,
+    first: req.body.first,
+    last: req.body.last,
+    bio: req.body.bio,
     token: req.cookies.token
   };
   if (dat.username == "") {
@@ -88,27 +92,59 @@ router.get("/user", middleware, function(req, res) {
   checkFriend(check)
     .then(function(data) {
       if (data.status == 0) {
-        res.render("profile", {
-          layout: false,
-          name: req.query.username,
-          bio: "Hey there I am using Closure!",
-          btn: "<button type='button' class='profile-edit-btn'>Friends</button>"
-        });
+        profiler(req.query.username)
+          .then(function(data) {
+            console.log(data);
+            res.render("profile", {
+              layout: false,
+              name: data.username,
+              first: data.first,
+              last: data.last,
+              bio: data.bio,
+              email: data.email,
+              btn:
+                "<button type='button' class='profile-edit-btn'>Friends</button>"
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       } else if (data.status == 1) {
-        res.render("profile", {
-          layout: false,
-          name: req.query.username,
-          bio: "Hey there I am using Closure!",
-          btn: "<button type='button' class='profile-edit-btn'>Pending</button>"
-        });
+        profiler(req.query.username)
+          .then(function(data) {
+            console.log(data);
+            res.render("profile", {
+              layout: false,
+              name: data.username,
+              first: data.first,
+              last: data.last,
+              bio: data.bio,
+              email: data.email,
+              btn:
+                "<button type='button' class='profile-edit-btn'>Pending</button>"
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       } else {
-        res.render("profile", {
-          layout: false,
-          name: req.query.username,
-          bio: "Hey there I am using Closure!",
-          btn:
-            "<button type='submit' class='profile-edit-btn' >Add friend</button>"
-        });
+        profiler(req.query.username)
+          .then(function(data) {
+            console.log(data);
+            res.render("profile", {
+              layout: false,
+              name: data.username,
+              first: data.first,
+              last: data.last,
+              bio: data.bio,
+              email: data.email,
+              btn:
+                "<button type='submit' class='profile-edit-btn' >Add friend</button>"
+            });
+          })
+          .catch(function(err) {
+            console.log(err);
+          });
       }
     })
     .catch(function(data) {
@@ -140,14 +176,25 @@ router.post("/user", middleware, function(req, res) {
 });
 
 router.get("/me", middleware, function(req, res) {
-  res.render("profile", {
-    layout: false,
-    name: req.cookies.username,
-    bio: "It's my profile"
-  });
+  profiler(req.cookies.username)
+    .then(function(data) {
+      console.log(data);
+      res.render("profile", {
+        layout: false,
+        name: data.username,
+        first: data.first,
+        last: data.last,
+        bio: data.bio,
+        email: data.email
+      });
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 });
 
 router.get("/pending", middleware, function(req, res) {
+  console.log("in pending");
   pending(req.cookies.token)
     .then(function(data) {
       res.render("pending", {
