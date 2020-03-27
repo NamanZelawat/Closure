@@ -99,7 +99,7 @@ body {
   color: #0062cc;
 }
 
-@media screen and (min-width: 0px) and (max-width: 400px) {
+@media screen and (min-width: 0px) and (max-width: 600px) {
   .toggle {
     display: none;
   }
