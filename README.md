@@ -26,4 +26,4 @@ npm run dev
 
 ## Web
 
-You can find closure hosted <a href="http://zelawat-closure.herokuapp.com/signup"></a>
+You can find closure hosted <a href="http://zelawat-closure.herokuapp.com/signup">here.</a>
