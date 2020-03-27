@@ -91,7 +91,9 @@ router.get("/user", middleware, function(req, res) {
   };
   checkFriend(check)
     .then(function(data) {
-      if (data.status == 0) {
+      if (check.username == check.name) {
+        res.redirect("me");
+      } else if (data.status == 0) {
         profiler(req.query.username)
           .then(function(data) {
             console.log(data);
