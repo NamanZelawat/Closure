@@ -213,19 +213,64 @@ router.get("/pending", middleware, function(req, res) {
 router.get("/request", middleware, function(req, res) {
   console.log(req.query);
   if (req.query.accepted == 0) {
-    res.render("request", {
-      layout: false,
-      name: req.query.username,
-      bio: "Hey there I am using closure",
-      btn: "<button type='submit' class='profile-edit-btn' >Accept</button>"
-    });
+    profiler(req.query.username)
+      .then(function(data) {
+        console.log(data);
+        res.render("request", {
+          layout: false,
+          name: data.username,
+          first: data.first,
+          last: data.last,
+          bio: data.bio,
+          email: data.email,
+          btn: "<button type='submit' class='profile-edit-btn' >Accept</button>"
+        });
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
+    // res.render("request", {
+    //   layout: false,
+    //   name: req.query.username,
+    //   bio: "Hey there I am using closure",
+    //   btn: "<button type='submit' class='profile-edit-btn' >Accept</button>"
+    // });
   } else {
-    res.render("request", {
-      layout: false,
-      name: req.query.username,
-      bio: "Hey there I am using closure",
-      btn: "<button type='button' class='profile-edit-btn' >Friends</button>"
-    });
+    var check = {
+      name: req.cookies.username,
+      username: req.query.username
+    };
+    checkFriend(check)
+      .then(function(data) {
+        if (data.status == 0) {
+          profiler(req.query.username)
+            .then(function(data) {
+              console.log(data);
+              res.render("request", {
+                layout: false,
+                name: data.username,
+                first: data.first,
+                last: data.last,
+                bio: data.bio,
+                email: data.email,
+                btn:
+                  "<button type='button' class='profile-edit-btn' >Friends</button>"
+              });
+            })
+            .catch(function(err) {
+              console.log(err);
+            });
+        } else {
+          res.redirect(`request?username=${check.username}&accepted=0`);
+        }
+      })
+      .catch(function(err) {});
+    // res.render("request", {
+    //   layout: false,
+    //   name: req.query.username,
+    //   bio: "Hey there I am using closure",
+    //   btn: "<button type='button' class='profile-edit-btn' >Friends</button>"
+    // });
   }
 });
 
