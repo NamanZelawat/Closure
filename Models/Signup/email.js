@@ -1,19 +1,21 @@
 var nodemailer = require("nodemailer");
 var sgTransport = require("nodemailer-sendgrid-transport");
+const dotenv = require("dotenv");
+dotenv.config();
 
 function email(emailid, otp) {
   return new Promise(function(resolve, reject) {
     var options = {
       auth: {
-        api_user: "Zelawat",
-        api_key: "se#3dDz9n%VL#r7"
+        api_user: process.env.API_USER,
+        api_key: process.env.API_KEY
       }
     };
 
     var client = nodemailer.createTransport(sgTransport(options));
 
     var email = {
-      from: "nisarjha@gmail.com",
+      from: process.env.EMAIL_ID,
       to: emailid,
       subject: "OTP",
       text: "Hello world",

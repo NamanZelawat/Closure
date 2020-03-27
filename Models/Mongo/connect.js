@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
-var connectionString =
-  "mongodb+srv://root:root@cluster0-v8twg.mongodb.net/test?retryWrites=true&w=majority";
+const dotenv = require("dotenv");
+dotenv.config();
+
+var connectionString = process.env.MONGO_CONNECTION_STRING;
 
 // Connect to mongo
 mongoose
@@ -10,5 +12,9 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true
   })
-  .then(() => {})
-  .catch(err => {});
+  .then(() => {
+    console.log("Mongodb connected");
+  })
+  .catch(err => {
+    console.log(err);
+  });
